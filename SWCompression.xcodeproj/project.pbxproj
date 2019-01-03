@@ -58,6 +58,7 @@
 		06595E131F1E90C2006501C2 /* 7zCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06595E121F1E90C2006501C2 /* 7zCoder.swift */; };
 		065D0ADC1F2B9D9100CE2DA8 /* 7zEntryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D0ADB1F2B9D9100CE2DA8 /* 7zEntryInfo.swift */; };
 		0665427521DE78AE00FEFAA8 /* Implode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0665427421DE78AE00FEFAA8 /* Implode.swift */; };
+		0665428621DE96CE00FEFAA8 /* ImplodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0665428521DE96CE00FEFAA8 /* ImplodeError.swift */; };
 		067518361E2A86F700D16354 /* ZipContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067518351E2A86F700D16354 /* ZipContainer.swift */; };
 		0686A63B1FA4C07D00E89C9E /* FileSystemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0686A63A1FA4C07D00E89C9E /* FileSystemType.swift */; };
 		0686A6401FA4C18800E89C9E /* FileSystemType+Gzip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0686A63F1FA4C18800E89C9E /* FileSystemType+Gzip.swift */; };
@@ -279,6 +280,7 @@
 		06595E121F1E90C2006501C2 /* 7zCoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = 7zCoder.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		065D0ADB1F2B9D9100CE2DA8 /* 7zEntryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 7zEntryInfo.swift; sourceTree = "<group>"; };
 		0665427421DE78AE00FEFAA8 /* Implode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Implode.swift; sourceTree = "<group>"; };
+		0665428521DE96CE00FEFAA8 /* ImplodeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplodeError.swift; sourceTree = "<group>"; };
 		067518351E2A86F700D16354 /* ZipContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipContainer.swift; sourceTree = "<group>"; };
 		0686A63A1FA4C07D00E89C9E /* FileSystemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemType.swift; sourceTree = "<group>"; };
 		0686A63F1FA4C18800E89C9E /* FileSystemType+Gzip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileSystemType+Gzip.swift"; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				0665427421DE78AE00FEFAA8 /* Implode.swift */,
+				0665428521DE96CE00FEFAA8 /* ImplodeError.swift */,
 			);
 			path = Implode;
 			sourceTree = "<group>";
@@ -1179,6 +1182,7 @@
 				061C06261F0E8A0300832F0C /* GzipError.swift in Sources */,
 				0620F4BE1F8E24AA001C9B7A /* Archive.swift in Sources */,
 				062C1D7C1F8FCA9300917968 /* TarExtendedHeader.swift in Sources */,
+				0665428621DE96CE00FEFAA8 /* ImplodeError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
