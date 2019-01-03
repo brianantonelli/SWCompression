@@ -10,10 +10,13 @@ public enum Implode: DecompressionAlgorithm {
 
     public static func decompress(data: Data) throws -> Data {
         let reader = LsbBitReader(data: data)
-        return try decompress(reader)
+        let ascii = reader.byte() == 1
+        guard let dictSize = Implode.DictionarySize(reader.byte())
+            else { throw ImplodeError.corruptedData }
+        return try decompress(reader, ascii, dictSize)
     }
 
-    static func decompress(_ bitReader: LsbBitReader) throws -> Data {
+    static func decompress(_ bitReader: LsbBitReader, _ ascii: Bool, _ dictSize: Implode.DictionarySize) throws -> Data {
         fatalError("Unimplemented")
     }
 
