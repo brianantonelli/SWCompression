@@ -25,16 +25,20 @@ public enum Implode: DecompressionAlgorithm {
 
         let minMatchLength = ascii ? 3 : 2
 
-        // TODO: Does this loop-end condition work for ZIP's Implode?
         while !reader.isFinished {
             let controlBit = reader.bit()
 
             if controlBit != 0 {
-                let literalSymbol = literalTree?.findNextSymbol()
-                guard literalSymbol != -1
-                    else { throw ImplodeError.corruptedData }
-                let literal = literalSymbol?.toUInt8() ?? reader.byte(fromBits: 8)
-                out.append(literal)
+                if literalTree != nil {
+                    let literalSymbol = literalTree!.implodeFindNextSymbol()
+                    guard literalSymbol != -1
+                        else { break }
+                    out.append(literalSymbol.toUInt8())
+                } else {
+                    guard reader.bitsLeft >= 8
+                        else { break }
+                    out.append(reader.byte(fromBits: 8))
+                }
             } else {
                 var distance = 0
                 // TODO: Does distance tree always encode high 6 bits of distance for all (even standalone) dict sizes?
@@ -47,23 +51,27 @@ public enum Implode: DecompressionAlgorithm {
                 default:
                     fatalError("Not implemented")
                 }
+                guard reader.bitsLeft >= distanceBitCount
+                    else { break }
                 distance |= reader.int(fromBits: distanceBitCount)
-                let distanceSymbol = distanceTree.findNextSymbol()
+                let distanceSymbol = distanceTree.implodeFindNextSymbol()
                 guard distanceSymbol != -1
-                    else { throw ImplodeError.corruptedData }
+                    else { break }
                 distance |= distanceSymbol << distanceBitCount
 
-                let lengthSymbol = lengthTree.findNextSymbol()
+                let lengthSymbol = lengthTree.implodeFindNextSymbol()
                 guard lengthSymbol != -1
-                    else { throw ImplodeError.corruptedData }
+                    else { break }
                 var length = minMatchLength + lengthSymbol
                 if lengthSymbol == 63 {
+                    guard reader.bitsLeft >= 8
+                        else { break }
                     length += reader.int(fromBits: 8)
                 }
 
 //                assert(distance >= length) // TODO: ???
 
-                var copyIndex = out.count - distance - 1 // TODO: "-1" ???
+                var copyIndex = out.count - distance - 1
                 while copyIndex < 0 && length > 0 {
                     out.append(0)
                     copyIndex += 1
